@@ -4,7 +4,7 @@
 // @namespace   imatake.github.io
 // @include     https://annict.com/programs
 // @author      imatake
-// @version     1.00.20160616
+// @version     1.00.20160617
 // @license     MIT License
 // @grant       none
 // ==/UserScript==
@@ -33,15 +33,21 @@ body.programs-index .a-content .a-programs .a-program-container.unbroadcasted .a
 (function () {
   // 放送予定の表示範囲設定
   document.body.addEventListener('load', function (e) {
+    var before_style = 'background-color: lightcyan;'; // 放送中の背景色
     var now_dt = new Date();
     // 非表示とする放送予定の時刻(通算ミリ秒, now_dt.getTime() + 12 * 60 * 60 * 1000 で現在時刻より12時間前)
     var hidden_dt = new Date(now_dt.getTime() + 12 * 60 * 60 * 1000);
+    // 放送中と判断する時刻(通算ミリ秒, now_dt.getTime() - 30 * 60 * 1000 で現在時刻より30分前)
+    var before_dt = new Date(now_dt.getTime() - 30 * 60 * 1000);
     // ---------- ----------
     $('div.a-program-container').each(function () {
       var started_at = $(this).find('span.a-started-at') [0];
       //console.info(started_at);
       var started_at_obj = new Date('2016/' + started_at.textContent);
+      // 指定範囲外の非表示
       if (started_at_obj > hidden_dt) this.style = 'display: none;';
+      // 放送中の表示
+      if(now_dt > started_at_obj && started_at_obj > before_dt) this.firstChild.style = before_style;
     });
   }, true);
 }) ();
@@ -60,11 +66,11 @@ body.programs-index .a-content .a-programs .a-program-container.unbroadcasted .a
       var time_select = document.createElement('select');
       sort_selector.appendChild(time_select);
       //
-      time_select.appendChild(createOptionItem('放送済みのみ', 'time_period_none', false));
+      //time_select.appendChild(createOptionItem('放送済みのみ', 'time_period_none', false));
       time_select.appendChild(createOptionItem('12時間以内まで', 'time_period_half', true));
-      time_select.appendChild(createOptionItem('1日(24時間)まで', 'time_period_1day', false));
-      time_select.appendChild(createOptionItem('2日(48時間)まで', 'time_period_2day', false));
-      time_select.appendChild(createOptionItem('3日(72時間)まで', 'time_period_3day', false));
+      //time_select.appendChild(createOptionItem('1日(24時間)まで', 'time_period_1day', false));
+      //time_select.appendChild(createOptionItem('2日(48時間)まで', 'time_period_2day', false));
+      //time_select.appendChild(createOptionItem('3日(72時間)まで', 'time_period_3day', false));
       //time_select.appendChild(createOptionItem('1週間', 'time_period_1week', false));
     }
   }, true);
