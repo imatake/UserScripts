@@ -1,0 +1,11 @@
+@-moz-document url("https://annict.com/programs") {
+body.programs-index .a-content .a-programs .a-program-container.unbroadcasted .a-program .a-header .a-started-at {
+    color: #228B22;
+}
+body.programs-index .a-content .a-programs .a-program-container.unbroadcasted .a-progress .a-line .a-point {
+    background-color: #228B22;
+}
+body.programs-index .a-content .a-programs .a-program-container.unbroadcasted .a-progress .a-line {
+    border-color: #228B22;
+}
+}
