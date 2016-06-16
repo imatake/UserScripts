@@ -33,7 +33,6 @@ body.programs-index .a-content .a-programs .a-program-container.unbroadcasted .a
 (function () {
   // 放送予定の表示範囲設定
   document.body.addEventListener('load', function (e) {
-    var before_style = 'background-color: lightcyan;'; // 放送中の背景色
     var now_dt = new Date();
     // 非表示とする放送予定の時刻(通算ミリ秒, now_dt.getTime() + 12 * 60 * 60 * 1000 で現在時刻より12時間前)
     var hidden_dt = new Date(now_dt.getTime() + 12 * 60 * 60 * 1000);
@@ -47,7 +46,10 @@ body.programs-index .a-content .a-programs .a-program-container.unbroadcasted .a
       // 指定範囲外の非表示
       if (started_at_obj > hidden_dt) this.style = 'display: none;';
       // 放送中の表示
-      if(now_dt > started_at_obj && started_at_obj > before_dt) this.firstChild.style = before_style;
+      if(now_dt > started_at_obj && started_at_obj > before_dt) {
+        $(this).find('div.a-line') [0].style = 'border-color: #87CEEB';
+        $(this).find('div.a-point') [0].style = 'background-color: #87CEEB';
+      }
     });
   }, true);
 }) ();
