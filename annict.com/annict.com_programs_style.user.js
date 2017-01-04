@@ -4,7 +4,7 @@
 // @namespace   imatake.github.io
 // @include     https://annict.com/programs
 // @author      imatake
-// @version     1.00.20160926
+// @version     1.00.20160104
 // @license     MIT License
 // @grant       none
 // ==/UserScript==
