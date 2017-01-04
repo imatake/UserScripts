@@ -103,7 +103,7 @@ body.programs-index .a-content .a-programs .a-program-container.unbroadcasted .a
       var started_at = $(this).find('span.a-started-at') [0];
       //console.info(started_at);
       this.style.display = '';
-      var started_at_obj = new Date('2016/' + started_at.textContent);
+      var started_at_obj = new Date('2017/' + started_at.textContent);
       // 指定範囲外の非表示
       if (started_at_obj > hidden_dt) this.style.display = 'none';
       // 放送中の表示
