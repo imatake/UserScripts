@@ -4,7 +4,7 @@
 // @namespace   imatake.github.io
 // @include     https://annict.com/programs
 // @author      imatake
-// @version     3.00.20170218
+// @version     3.00.20170323
 // @license     MIT License
 // @grant       none
 // ==/UserScript==
@@ -78,6 +78,7 @@ body.p-programs .c-program-list .is-unbroadcasted .c-program-progress__point {
     // 非表示とする放送予定の時刻(通算ミリ秒, now_dt.getTime() + 12 * 60 * 60 * 1000 で現在時刻より12時間前)
     var hidden_dt = hidden_msec >= 0 ? new Date(now_dt.getTime() + hidden_msec * 1)  : new Date('2099/12/31 23:59:59.999');
     //console.info(hidden_dt);
+    var past_dt = hidden_msec >= 0 ? new Date(now_dt.getTime() - 365 * 24 * 60 * 60 * 1000)  : new Date(0);
     // 放送中と判断する時刻(通算ミリ秒, now_dt.getTime() - 30 * 60 * 1000 で現在時刻より30分前)
     var before_dt = new Date(now_dt.getTime() - 30 * 60 * 1000);
     // ---------- ----------
@@ -85,9 +86,10 @@ body.p-programs .c-program-list .is-unbroadcasted .c-program-progress__point {
       var started_at = $(this).find('span.mr-zp5') [0];
       //console.info(started_at);
       this.style.display = '';
-      var started_at_obj = new Date('2017/' + started_at.textContent);
+      var started_at_obj = new Date(started_at.textContent);
       // 指定範囲外の非表示
       if (started_at_obj > hidden_dt) this.style.display = 'none';
+      if (started_at_obj < past_dt) this.style.display = 'none';
       // 放送中の表示
       if (now_dt > started_at_obj && started_at_obj > before_dt) {
         $(this).find('div.a-line') [0].style = 'border-color: #87CEEB';
