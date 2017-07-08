@@ -3,8 +3,9 @@
 // @description Annict の放送予定ページで放送前の表示色を変更します。また、放送予定の表示範囲を抑制します。
 // @namespace   imatake.github.io
 // @include     https://annict.com/programs
+// @include     https://annict.jp/programs
 // @author      imatake
-// @version     3.00.20170323
+// @version     3.00.20170708
 // @license     MIT License
 // @grant       none
 // ==/UserScript==
